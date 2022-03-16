@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:Color_Viewer"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <!--<Window.DataContext>
-        <local:ViewModel></local:ViewModel>
-    </Window.DataContext>-->
+    <Window.DataContext>
+        <local:AppViewModel></local:AppViewModel>
+    </Window.DataContext>
 
     <!--<Window.Resources>
         -->
@@ -47,10 +47,10 @@
         </Grid.RowDefinitions>
 
         <StackPanel VerticalAlignment="Top">
-            <CheckBox HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"/>
-            <CheckBox HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"/>
-            <CheckBox HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"/>
-            <CheckBox HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"/>
+            <CheckBox IsChecked="{Binding ChBAlpha,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"/>
+            <CheckBox IsChecked="{Binding ChBRed,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"/>
+            <CheckBox IsChecked="{Binding ChBGreen,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"/>
+            <CheckBox IsChecked="{Binding ChBBlue,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top"/>
         </StackPanel>
 
         <Grid Grid.Column="1">
@@ -67,31 +67,51 @@
 
             <!--Тут использовать биндинги биндинги для ползунков т-->
             <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <Label HorizontalAlignment="Center">Alpha:</Label>
-                <Label HorizontalAlignment="Center">Red:</Label>
-                <Label HorizontalAlignment="Center">Green:</Label>
-                <Label HorizontalAlignment="Center">Blue:</Label>
+                <Label Content="{Binding SliderAlpha, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"></Label>
+                <Label Content="{Binding SliderRed, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"></Label>
+                <Label Content="{Binding SliderGreen , UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"></Label>
+                <Label Content="{Binding SliderBlue , UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"></Label>
             </StackPanel>
             <!--Тут использовать биндинги для ползунков-->
 
         </Grid>
         <StackPanel Grid.Column="2">
-            <Slider Margin="4" Value="0" Minimum="0" Maximum="255" SmallChange="1" LargeChange="30" VerticalAlignment="Center"/>
-            <Slider Margin="4" Value="0" Minimum="0" Maximum="255" SmallChange="1" LargeChange="30" VerticalAlignment="Center"/>
-            <Slider Margin="4" Value="0" Minimum="0" Maximum="255" SmallChange="1" LargeChange="30" VerticalAlignment="Center"/>
-            <Slider Margin="4" Value="0" Minimum="0" Maximum="255" SmallChange="1" LargeChange="30" VerticalAlignment="Center"/>
+            <Slider Margin="4" Value="{Binding SliderAlpha, UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="255" SmallChange="1" LargeChange="30" VerticalAlignment="Center"/>
+            <Slider Margin="4" Value="{Binding SliderRed,UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="255" SmallChange="1" LargeChange="30" VerticalAlignment="Center"/>
+            <Slider Margin="4" Value="{Binding SliderGreen,UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="255" SmallChange="1" LargeChange="30" VerticalAlignment="Center"/>
+            <Slider Margin="4" Value="{Binding SliderBlue,UpdateSourceTrigger=PropertyChanged}" Minimum="0" Maximum="255" SmallChange="1" LargeChange="30" VerticalAlignment="Center"/>
         </StackPanel>
-        <Border Margin="5" Background="Aqua" BorderThickness="1" Grid.Column="3"/>
+
+        <!--Opacity="{Binding SliderAlpha ,UpdateSourceTrigger=PropertyChanged}"-->
+        <!--Background="{Binding ColorBackground, UpdateSourceTrigger=PropertyChanged}"-->
+        <!--<Border Margin="5"  BorderThickness="1" Grid.Column="3"/>-->
+        <Border Grid.Column="3">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="{Binding ColorBackground, UpdateSourceTrigger=PropertyChanged}"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+
+        <!--<Rectangle Margin="5" Grid.Column="3">
+            <Rectangle.Fill>
+                <SolidColorBrush>
+                    <SolidColorBrush.Color>
+                        <Color A="255" R="0" G="0" B="255" />
+                    </SolidColorBrush.Color>
+                </SolidColorBrush>
+            </Rectangle.Fill>
+        </Rectangle>-->
 
         <WrapPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="5">
             <Button Background="RoyalBlue" Margin="5" Width="80" >Add</Button>
-            <!--<Button Background="RoyalBlue" Margin="5" Width="80" >Delete</Button>-->
         </WrapPanel>
 
         <Border Margin="5" BorderBrush="#FF484747" BorderThickness="1" Grid.Row="2" Grid.ColumnSpan="5">
             <!--<ListBox ItemsSource="{Binding Path=ClientProducts, UpdateSourceTrigger=PropertyChanged}" ItemTemplate="{StaticResource ProductInfoTemplate}" Grid.Row="1" Grid.Column="1"></ListBox>-->
             <!--<ListBox>-->
-                <StackPanel>
+            <StackPanel>
                 <ListBox HorizontalContentAlignment="Stretch">
                     <Grid Height="40" >
                         <Grid.ColumnDefinitions>
