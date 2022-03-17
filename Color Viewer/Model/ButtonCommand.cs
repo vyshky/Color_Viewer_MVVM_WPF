@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Color_Viewer.Model
+namespace Color_Viewer
 {
     public class ButtonCommand : ICommand
     {

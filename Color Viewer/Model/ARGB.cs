@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace Color_Viewer.Model
+namespace Color_Viewer
 {
     public class ARGB
     {

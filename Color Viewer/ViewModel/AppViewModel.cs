@@ -1,4 +1,4 @@
-﻿using Color_Viewer.Model;
+﻿using Color_Viewer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
