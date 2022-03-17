@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Color_Viewer.Model;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Color_Viewer
@@ -20,15 +23,49 @@ namespace Color_Viewer
         bool _chBRed;
         bool _chBGreen;
         bool _chBBlue;
+        List<ARGB> _colorsList;
 
         public AppViewModel()
         {
             _color = new Color();
             _color = Colors.Black;
+            _colorsList = new List<ARGB>();
+            _colorsList.Add(new ARGB(_color));
         }
         public void Refresh()
         {
             PropertyChanging("ColorBackground");
+        }
+
+        public ICommand AddColor
+        {
+            get
+            {
+                return new ButtonCommand(
+                    () =>
+                    {
+                        ARGB newARGB = new ARGB(ColorBackground);
+                        foreach (var color in _colorsList)
+                        {
+                            if (color.Code.Contains(newARGB.Code)) return;
+                        }
+                        _colorsList.Add(newARGB);
+                        ColorsList = new List<ARGB>(_colorsList);
+                    }
+                    );
+            }
+        }
+        public List<ARGB> ColorsList
+        {
+            get
+            {
+                return _colorsList;
+            }
+            set
+            {
+                _colorsList = value;
+                PropertyChanging();
+            }
         }
 
         public bool ChBAlpha
@@ -37,7 +74,6 @@ namespace Color_Viewer
             set
             {
                 _chBAlpha = value;
-                //Refresh();
             }
         }
 
@@ -47,7 +83,6 @@ namespace Color_Viewer
             set
             {
                 _chBRed = value;
-                //Refresh();
             }
         }
 
@@ -57,7 +92,6 @@ namespace Color_Viewer
             set
             {
                 _chBGreen = value;
-                //Refresh();
             }
         }
         public bool ChBBlue
@@ -66,7 +100,6 @@ namespace Color_Viewer
             set
             {
                 _chBBlue = value;
-                //Refresh();
             }
         }
 
